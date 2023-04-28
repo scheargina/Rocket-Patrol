@@ -119,7 +119,9 @@ class Play extends Phaser.Scene {
       });      
       this.p1Score += ship.points;
       this.scoreLeft.text = this.p1Score;
-      this.sound.play('sfx_explosion');     
+      let index = Math.floor(Math.random()*5);
+      let sound_dict = ['sfx_explosion','sfx_explosiona','sfx_explosionb','sfx_explosionc','sfx_explosiond'];
+      this.sound.play(sound_dict[index]);     
     }
     addTime(){
       let scoreConfig = {
