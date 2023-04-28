@@ -10,8 +10,10 @@ class Menu extends Phaser.Scene {
       this.load.audio('sfx_explosionc', './assets/explosion41.wav');
       this.load.audio('sfx_explosiond', './assets/explosion42.wav');
       this.load.audio('sfx_rocket', './assets/rocket_shot.wav');
+      this.load.audio('backgroundm', './assets/background.mp3');
     }
     create() {
+      this.sound.play('backgroundm');
 
       let menuConfig = {
           fontFamily: 'Courier',
