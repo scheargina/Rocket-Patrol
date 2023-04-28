@@ -85,6 +85,11 @@ class Play extends Phaser.Scene {
         this.ship03.update();
         this.ship04.update();
         this.clockRight.text = Math.floor((game.settings.gameTimer - this.time.now + this.time.startTime)/1000 + this.addtime);
+        if(this.time.now - this.time.startTime >=30000 && game.settings.spaceshipSpeed == this.ship01.moveSpeed){
+          this.ship01.moveSpeed += 2;
+          this.ship02.moveSpeed += 3;
+          this.ship03.moveSpeed += 2;
+        }
       }   
 
       if(this.checkCollision(this.p1Rocket, this.ship03)) {
