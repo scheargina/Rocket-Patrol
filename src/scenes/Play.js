@@ -6,14 +6,14 @@ class Play extends Phaser.Scene {
       this.load.image('rocket', './assets/rocket.png');
       this.load.image('spaceship', './assets/spaceship.png');
       this.load.image('kaiwen01', './assets/kaiwen01.png');
-      this.load.image('starfield', './assets/starfield.png');
+      this.load.image('starfield', './assets/1starfield.png');
       this.load.spritesheet('aspaceship', './assets/aspaceship.png', {frameWidth: 64, frameHeight: 32, startFrame: 0, endFrame: 2});
       this.load.spritesheet('explosion', './assets/explosion.png', {frameWidth: 64, frameHeight: 32, startFrame: 0, endFrame: 9});
     }
     
     create() {
       this.starfield = this.add.tileSprite(0, 0, 640, 480, 'starfield').setOrigin(0, 0);
-      this.add.rectangle(0, borderUISize + borderPadding, game.config.width, borderUISize * 2, 0x00FF00).setOrigin(0, 0);
+      this.add.rectangle(0, borderUISize + borderPadding, game.config.width, borderUISize * 2, 0x3131F3).setOrigin(0, 0);
       this.add.rectangle(0, 0, game.config.width, borderUISize, 0xFFFFFF).setOrigin(0, 0);
       this.add.rectangle(0, game.config.height - borderUISize, game.config.width, borderUISize, 0xFFFFFF).setOrigin(0, 0);
       this.add.rectangle(0, 0, borderUISize, game.config.height, 0xFFFFFF).setOrigin(0, 0);
@@ -57,6 +57,7 @@ class Play extends Phaser.Scene {
         fixedWidth: 100
       }
       this.scoreLeft = this.add.text(borderUISize + borderPadding, borderUISize + borderPadding*2, this.p1Score, scoreConfig);
+      this.bestp = this.add.text(borderUISize + borderPadding + scoreConfig.fixedWidth *1.5 , borderUISize + borderPadding*2, config.bestpoint, scoreConfig);
       this.addtime = 0;
       this.clockRight = this.add.text(-borderUISize + game.config.width - borderPadding - scoreConfig.fixedWidth, borderUISize + borderPadding*2, this.p1Score, scoreConfig);
       this.gameOver = false;
@@ -65,7 +66,11 @@ class Play extends Phaser.Scene {
           this.add.text(game.config.width/2, game.config.height/2, 'GAME OVER', scoreConfig).setOrigin(0.5);
           this.add.text(game.config.width/2, game.config.height/2 + 64, 'Press (R) to Restart or ← for Menu', scoreConfig).setOrigin(0.5);
           this.gameOver = true;
+          if(config.bestpoint < this.p1Score){
+            config.bestpoint = this.p1Score;
+          }
       }, null, this);
+      scoreConfig.backgroundColor = '#B81818';
       this.fire = this.add.text(game.config.width/2 - scoreConfig.fixedWidth/2, borderUISize + borderPadding*2, 'Fire!', scoreConfig);
       this.fire.visible = false;
     }
@@ -162,6 +167,9 @@ class Play extends Phaser.Scene {
         this.add.text(game.config.width/2, game.config.height/2, 'GAME OVER', scoreConfig).setOrigin(0.5);
         this.add.text(game.config.width/2, game.config.height/2 + 64, 'Press (R) to Restart or ← for Menu', scoreConfig).setOrigin(0.5);
         this.gameOver = true;
+        if(config.bestpoint < this.p1Score){
+          config.bestpoint = this.p1Score;
+        }
       }, null, this);
     }
 
